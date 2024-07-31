@@ -15,15 +15,15 @@ const BottomBar = () => {
   ];
 
   return (
-    <View className="absolute bottom-4 flex flex-row w-full justify-center items-center">
+    <View className="absolute flex flex-row items-center justify-center w-full bottom-4">
       <View
-        className="bg-white rounded-full flex-row items-center justify-center px-2"
+        className="flex-row items-center justify-center px-2 bg-white rounded-full"
         style={dropShadow}>
         {items.map((item) => (
           <TouchableOpacity
             onPress={() => navigate(item.name as never)}
             key={item.name}
-            className="rounded-full justify-center inline-flex p-4 items-center">
+            className="inline-flex items-center justify-center p-4 rounded-full">
             <item.IconComponent isActive={route.name === item.name} />
           </TouchableOpacity>
         ))}
