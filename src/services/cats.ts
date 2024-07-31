@@ -16,7 +16,6 @@ async function getCatImages(limit: number): Promise<CatImage[]> {
     const response = await axiosInstance.get<CatImage[]>(`/images/search`, {
       params: { limit },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     handleError(error);
@@ -30,7 +29,6 @@ async function reviewCat(id: string, vote: number): Promise<CatVote> {
       image_id: id,
       value: vote,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     handleError(error);
