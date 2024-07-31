@@ -113,8 +113,8 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
     <>
       <View className="items-center">
         {cards
-          .map((Cat, index) => {
-            const { id, imageUrl } = Cat;
+          .map((cat, index) => {
+            const { id, imageUrl, country, name } = cat;
 
             const isFirst = index === 0;
             const dragHandlers = isFirst ? panResponder.panHandlers : {};
@@ -140,14 +140,14 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
                       className="flex flex-row items-center justify-between "
                       style={{ gap: 4 }}>
                       <Text className="text-xl font-bold text-[#434141]">
-                        Abyssinian
+                        {name}
                       </Text>
                       <Text className="text-xl font-bold text-[#434141]">
                         8
                       </Text>
                     </View>
                     <Text className="text-sm font-medium text-[#BFBFC0]">
-                      Egypt
+                      {country}
                     </Text>
                   </View>
                 </CatCard.Content>
