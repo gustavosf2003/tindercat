@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "tindercat",
+    "slug": "tindercat",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/tindercat.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tindercat.com",
+      "requireFullScreen": true
+    },
+    "android": {
+      "package": "com.tindercat.com"
+    },
+    "web": {
+      "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9bbc43ff-cabe-40e0-94de-8243ea4cacec"
+      }
+    }
+  }
+}
