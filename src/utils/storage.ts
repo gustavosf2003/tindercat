@@ -1,9 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export enum STORAGE {
-  LANGUAGE = "@app:language",
-}
-
 export const setStorageData = async (key: string, value: any) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(value));

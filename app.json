@@ -19,13 +19,6 @@
     "android": {
       "package": "com.tindercat.com"
     },
-    "web": {
-      "favicon": "./src/assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "9bbc43ff-cabe-40e0-94de-8243ea4cacec"
-      }
-    }
+    "extra": {}
   }
 }

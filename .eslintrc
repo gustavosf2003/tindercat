@@ -24,10 +24,6 @@
             "position": "before"
           },
           {
-            "pattern": "i18n/**",
-            "group": "internal"
-          },
-          {
             "pattern": "@/**",
             "group": "internal"
           }
