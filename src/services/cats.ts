@@ -1,36 +1,51 @@
 import { CatImage, CatVote } from "@src/types/cat";
 import axios from "axios";
 
+const API_KEY =
+  "live_hUZQNFTG3f2YWtV1HFeBTZpffwFDYUfp11ZbREx8BDJPGas1SZe5Yxolk4N9ANnw";
+
+const axiosInstance = axios.create({
+  baseURL: "https://api.thecatapi.com/v1",
+  headers: {
+    "x-api-key": API_KEY,
+  },
+});
+
 async function getCatImages(limit: number): Promise<CatImage[]> {
   try {
-    const response = await axios.get(
-      `https://api.thecatapi.com/v1/images/search?limit=${limit}`
-    );
+    const response = await axiosInstance.get<CatImage[]>(`/images/search`, {
+      params: { limit },
+    });
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    handleError(error);
+    throw new Error("Failed to fetch cat images.");
   }
 }
 
 async function reviewCat(id: string, vote: number): Promise<CatVote> {
   try {
-    const response = await axios.post(
-      `https://api.thecatapi.com/v1/votes`,
-      {
-        image_id: id,
-        value: vote,
-      },
-      {
-        headers: {
-          // This is not a good practice, but I'm doing it for testing purposes
-          "x-api-key":
-            "live_hUZQNFTG3f2YWtV1HFeBTZpffwFDYUfp11ZbREx8BDJPGas1SZe5Yxolk4N9ANnw",
-        },
-      }
-    );
+    const response = await axiosInstance.post<CatVote>(`/votes`, {
+      image_id: id,
+      value: vote,
+    });
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    handleError(error);
+    throw new Error("Failed to submit vote.");
+  }
+}
+
+function handleError(error: unknown): void {
+  if (axios.isAxiosError(error)) {
+    console.error(
+      `Axios error: ${error.response?.status} - ${error.response?.statusText}`
+    );
+    console.error(`Response data: ${error.response?.data}`);
+  } else {
+    console.error(`Unexpected error: ${error}`);
   }
 }
 
