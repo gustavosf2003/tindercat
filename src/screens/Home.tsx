@@ -1,11 +1,10 @@
 import CustomTab from "@src/components/CustomTab";
 import Layout from "@src/components/Layout";
-import SwipeButtons from "@src/components/SwipeableComponent/SwipeButtons";
 import TinderSwipeCards from "@src/components/TinderSwipeComponent";
 import catsService from "@src/services/cats";
 import { CatImage } from "@src/types/cat";
-import { useQuery } from "@tanstack/react-query";
-import { View, Text, Image } from "react-native";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { View, Text } from "react-native";
 
 export default function Home() {
   return (
@@ -14,8 +13,6 @@ export default function Home() {
         <CustomTab />
         <View className="mt-5" />
         <CatComponent />
-
-        {/* <CatComponent /> */}
       </View>
     </Layout>
   );
@@ -30,12 +27,27 @@ const CatComponent = () => {
     initialData: [] as CatImage[],
   });
 
+  const mutation = useMutation({
+    mutationFn: async ({ id, vote }: { id: string; vote: number }) =>
+      await catsService.reviewCat(id, vote),
+  });
+
+  const onSwipe = (status: "accept" | "reject", id: string) => {
+    if (status === "accept") {
+      console.log("accept", id);
+      mutation.mutate({ id, vote: 1 });
+    } else {
+      mutation.mutate({ id, vote: -1 });
+    }
+  };
+
   if (isFetching) {
     return <Text>Loading...</Text>;
   }
   if (!data) {
     return <Text>No cats found</Text>;
   }
+
   return (
     <View className="">
       <TinderSwipeCards
@@ -48,7 +60,7 @@ const CatComponent = () => {
           };
         })}
         onEndReached={() => {}}
-        onSwipe={(status, id) => {}}
+        onSwipe={onSwipe}
       />
     </View>
   );

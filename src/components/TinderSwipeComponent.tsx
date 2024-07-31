@@ -1,6 +1,7 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { MARGIN_X } from "@src/config/constants";
 import { Image } from "expo-image";
 import { Animated, Dimensions, PanResponder, Text, View } from "react-native";
 
@@ -20,7 +21,7 @@ type SwipeableCardProps = {
   onEndReached: () => void;
 };
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("screen");
 
 const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
   content,
@@ -102,12 +103,12 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
   );
 
   if (cards.length === 0) {
-    return <Text className="text-lg text-red-400">asdasd</Text>;
+    return <Text className="mt-20 text-lg">That's All!!</Text>;
   }
 
   return (
     <>
-      <View className=" items-center bg-black">
+      <View className="items-center">
         {cards
           .map((candidate, index) => {
             const { id, name, imageUrl } = candidate;
@@ -126,26 +127,34 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
                   <Image
                     source={{ uri: imageUrl }}
                     contentFit="cover"
-                    className="rounded-t-2xl w-full h-full"
+                    className="w-full h-full rounded-2xl"
                     cachePolicy="memory-disk"
                   />
                 </CandidateCard.Image>
                 <CandidateCard.Content>
                   <View>
                     <View
-                      className="flex flex-row justify-between items-center"
+                      className="flex flex-row items-center justify-between "
                       style={{ gap: 4 }}>
-                      <Text className="text-white text-2xl font-headline-medium">
-                        {name}
+                      <Text className="text-xl font-bold text-[#434141]">
+                        Abyssinian
+                      </Text>
+                      <Text className="text-xl font-bold text-[#434141]">
+                        8
                       </Text>
                     </View>
+                    <Text className="text-sm font-medium text-[#BFBFC0]">
+                      Egypt
+                    </Text>
                   </View>
                 </CandidateCard.Content>
               </CandidateCard.AnimatedRoot>
             );
           })
           .reverse()}
-        <View className=" absolute" style={{ gap: 64 }}>
+        <View
+          className="bottom-0"
+          style={{ gap: 64, marginTop: (SCREEN_WIDTH - MARGIN_X) / 0.8 + 64 }}>
           <SwipeButtons
             onAccept={() => handleChoice(1)}
             onReject={() => handleChoice(-1)}

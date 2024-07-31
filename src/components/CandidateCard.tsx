@@ -26,7 +26,7 @@ const CandidateCardAnimatedRoot: React.FC<{
 
   const borderColor = swipe.x.interpolate({
     inputRange: [-100, -50, 0, 50, 100],
-    outputRange: ["red", "red", "gray", "green", "green"],
+    outputRange: ["red", "red", "white", "green", "green"],
   });
 
   // Animated style for the card with rotation and translation
@@ -52,14 +52,14 @@ const CandidateCardAnimatedRoot: React.FC<{
         <Animated.View
           className="absolute left-4 top-4"
           style={[{ opacity: approveOpacity }]}>
-          <View className="rounded-full bg-green p-5">
+          <View className="p-5 rounded-full bg-green">
             <Feather name="check" size={40} color="green" />
           </View>
         </Animated.View>
         <Animated.View
           className="absolute right-4 top-4"
           style={[{ opacity: denyOpacity }]}>
-          <View className="rounded-full bg-error p-5">
+          <View className="p-5 rounded-full bg-error">
             <Feather name="x" size={40} color="red" />
           </View>
         </Animated.View>
@@ -69,7 +69,7 @@ const CandidateCardAnimatedRoot: React.FC<{
 
   return (
     <Animated.View
-      className="absolute top-4 rounded-2xl border bg-black"
+      className="absolute border top-4 rounded-2xl"
       style={[
         { width: SCREEN_WIDTH - MARGIN_X },
         isFirst && animatedCardStyle,
@@ -86,8 +86,8 @@ const CardImage: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
   return (
-    <View className="relative">
-      <View style={{ height: (SCREEN_WIDTH - MARGIN_X) / 1.5 }}>
+    <View className="relative ">
+      <View style={{ height: (SCREEN_WIDTH - MARGIN_X) / 0.8 }}>
         {children}
       </View>
     </View>
@@ -97,7 +97,9 @@ const CardImage: React.FC<{
 const CardContent: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <View className="absolute bottom-0 w-full">
-      <View className="mx-4 bg-white bottom-0">{children}</View>
+      <View className="bottom-0 px-4 py-2 mx-4 bg-white rounded-t-xl">
+        {children}
+      </View>
     </View>
   );
 };
