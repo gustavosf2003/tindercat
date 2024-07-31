@@ -1,4 +1,4 @@
-import { CatImage } from "@src/types/cat";
+import { CatImage, CatVote } from "@src/types/cat";
 import axios from "axios";
 
 async function getCatImages(limit: number): Promise<CatImage[]> {
@@ -12,7 +12,7 @@ async function getCatImages(limit: number): Promise<CatImage[]> {
   }
 }
 
-async function reviewCat(id: string, vote: number): Promise<boolean> {
+async function reviewCat(id: string, vote: number): Promise<CatVote> {
   try {
     const response = await axios.post(
       `https://api.thecatapi.com/v1/votes`,
@@ -28,7 +28,6 @@ async function reviewCat(id: string, vote: number): Promise<boolean> {
         },
       }
     );
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

@@ -2,13 +2,14 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { MARGIN_X } from "@src/config/constants";
+import { SwipeActions } from "@src/types/cat";
 import { Image } from "expo-image";
 import { Animated, Dimensions, PanResponder, Text, View } from "react-native";
 
-import { CandidateCard } from "./CandidateCard";
+import { CatCard } from "./CatCard";
 import SwipeButtons from "./SwipeableComponent/SwipeButtons";
 
-type CandidateCardProps = {
+type CatCardProps = {
   name: string;
   country: string;
   imageUrl: string | null;
@@ -16,8 +17,8 @@ type CandidateCardProps = {
 };
 
 type SwipeableCardProps = {
-  content: CandidateCardProps[];
-  onSwipe: (status: "accept" | "reject", id: string) => void;
+  content: CatCardProps[];
+  onSwipe: (status: SwipeActions, id: string) => void;
   onEndReached: () => void;
 };
 
@@ -28,7 +29,7 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
   onSwipe,
   onEndReached,
 }) => {
-  const [cards, setCards] = useState<CandidateCardProps[]>(content);
+  const [cards, setCards] = useState<CatCardProps[]>(content);
 
   // animated values for swipe and tilt
   const swipe = useRef(new Animated.ValueXY()).current;
@@ -38,7 +39,7 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
     if (!cards.length) {
       onEndReached();
     }
-  }, [cards.length]);
+  }, [cards.length, onEndReached]);
 
   const panResponder = PanResponder.create({
     // allow pan responder to activate, set limits to be able to press buttons within cards
@@ -99,6 +100,8 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
         useNativeDriver: true,
       }).start(removeTopCard);
     },
+    //---> not a good practice
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [cards, onSwipe, swipe.x]
   );
 
@@ -110,28 +113,28 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
     <>
       <View className="items-center">
         {cards
-          .map((candidate, index) => {
-            const { id, name, imageUrl } = candidate;
+          .map((Cat, index) => {
+            const { id, imageUrl } = Cat;
 
             const isFirst = index === 0;
             const dragHandlers = isFirst ? panResponder.panHandlers : {};
 
             return (
-              <CandidateCard.AnimatedRoot
+              <CatCard.AnimatedRoot
                 key={id}
                 isFirst={isFirst}
                 swipe={swipe}
                 tiltSign={tiltSign}
                 dragHandlers={dragHandlers}>
-                <CandidateCard.Image>
+                <CatCard.Image>
                   <Image
                     source={{ uri: imageUrl }}
                     contentFit="cover"
                     className="w-full h-full rounded-2xl"
                     cachePolicy="memory-disk"
                   />
-                </CandidateCard.Image>
-                <CandidateCard.Content>
+                </CatCard.Image>
+                <CatCard.Content>
                   <View>
                     <View
                       className="flex flex-row items-center justify-between "
@@ -147,8 +150,8 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
                       Egypt
                     </Text>
                   </View>
-                </CandidateCard.Content>
-              </CandidateCard.AnimatedRoot>
+                </CatCard.Content>
+              </CatCard.AnimatedRoot>
             );
           })
           .reverse()}

@@ -97,14 +97,14 @@ export const SwipeableCard: React.FC<SwipeableCardProps> = ({
         <Animated.View
           className="absolute top-6 -left-6"
           style={[{ ...approvedOpacity }]}>
-          <View className="p-3 bg-green rounded-full">
+          <View className="p-3 rounded-full bg-green">
             <Feather name="check" size={24} color="black" />
           </View>
         </Animated.View>
         <Animated.View
           className="absolute top-6 -right-6"
           style={[{ ...deniedOpacity }]}>
-          <View className="p-3 bg-error rounded-full">
+          <View className="p-3 rounded-full bg-error">
             <Feather name="x" size={24} color="black" />
           </View>
         </Animated.View>
@@ -130,7 +130,7 @@ export const SwipeableCard: React.FC<SwipeableCardProps> = ({
           {renderChoice()}
         </Animated.View>
       </GestureDetector>
-      <View className="w-fulll flex items-center mt-8">
+      <View className="flex items-center mt-8 w-fulll">
         <SwipeButtons onAccept={handleAccept} onReject={handleDeny} />
       </View>
     </>

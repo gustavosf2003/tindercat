@@ -4,12 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import BottomBar from "../BottomBar";
 
-interface LayoutProps {
+type LayoutProps = {
   children: React.ReactNode;
   customClassName?: string;
-}
+};
 
-export default function Layout({ children, customClassName }: LayoutProps) {
+const Layout = ({ children, customClassName }: LayoutProps) => {
   return (
     <SafeAreaView className="bg-white">
       <View className={clsx("h-full relative bg-white", customClassName)}>
@@ -18,4 +18,5 @@ export default function Layout({ children, customClassName }: LayoutProps) {
       </View>
     </SafeAreaView>
   );
-}
+};
+export default Layout;

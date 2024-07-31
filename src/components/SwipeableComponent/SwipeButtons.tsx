@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import { Button } from "../Button";
+import Button from "../Button";
 import { Icon } from "../Icon";
 
 const SwipeButtons = ({

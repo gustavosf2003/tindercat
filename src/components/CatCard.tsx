@@ -11,7 +11,7 @@ import {
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 
-const CandidateCardAnimatedRoot: React.FC<{
+const CatCardAnimatedRoot: React.FC<{
   isFirst: boolean;
   swipe: Animated.ValueXY;
   tiltSign: Animated.Value;
@@ -104,8 +104,8 @@ const CardContent: React.FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-export const CandidateCard = {
-  AnimatedRoot: CandidateCardAnimatedRoot,
+export const CatCard = {
+  AnimatedRoot: CatCardAnimatedRoot,
   Content: CardContent,
   Image: CardImage,
 };

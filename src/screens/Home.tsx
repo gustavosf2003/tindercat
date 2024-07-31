@@ -2,7 +2,7 @@ import CustomTab from "@src/components/CustomTab";
 import Layout from "@src/components/Layout";
 import TinderSwipeCards from "@src/components/TinderSwipeComponent";
 import catsService from "@src/services/cats";
-import { CatImage } from "@src/types/cat";
+import { CatImage, SwipeActions } from "@src/types/cat";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { View, Text } from "react-native";
 
@@ -32,9 +32,8 @@ const CatComponent = () => {
       await catsService.reviewCat(id, vote),
   });
 
-  const onSwipe = (status: "accept" | "reject", id: string) => {
+  const onSwipe = (status: SwipeActions, id: string) => {
     if (status === "accept") {
-      console.log("accept", id);
       mutation.mutate({ id, vote: 1 });
     } else {
       mutation.mutate({ id, vote: -1 });
@@ -59,7 +58,9 @@ const CatComponent = () => {
             imageUrl: cat.url,
           };
         })}
-        onEndReached={() => {}}
+        onEndReached={() => {
+          console.log("hey");
+        }}
         onSwipe={onSwipe}
       />
     </View>
