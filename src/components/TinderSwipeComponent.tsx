@@ -139,14 +139,14 @@ const TinderSwipeCards: React.FC<SwipeableCardProps> = ({
                     <View
                       className="flex flex-row items-center justify-between "
                       style={{ gap: 4 }}>
-                      <Text className="text-xl font-bold text-[#434141]">
+                      <Text className="text-xl font-bold text-customBlack">
                         {name}
                       </Text>
-                      <Text className="text-xl font-bold text-[#434141]">
+                      <Text className="text-xl font-bold text-customBlack">
                         8
                       </Text>
                     </View>
-                    <Text className="text-sm font-medium text-[#BFBFC0]">
+                    <Text className="text-sm font-medium text-customGrey">
                       {country}
                     </Text>
                   </View>

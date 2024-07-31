@@ -6,7 +6,7 @@ import { Icon } from "../Icon";
 const CustomTab = () => {
   return (
     <View
-      className="bg-[#E3E3E4] p-1 rounded-full flex flex-row items-center justify-centers"
+      className="bg-customWhite p-1 rounded-full flex flex-row items-center justify-centers"
       style={dropShadow}>
       <TouchableOpacity className="inline-flex items-center justify-center px-3 py-1 bg-white rounded-full ">
         <Icon.Tinder />
